@@ -9,10 +9,10 @@ namespace Nancy.Simple
 
 		public static int BetRequest(JObject gameState)
 		{
-            int myPlayerIndex = (int)gameState["in_action"];
-            int myPlayer = (int)gameState["players"][myPlayerIndex];
+            //int myPlayerIndex = (int)gameState["in_action"];
+            //int myPlayer = (int)gameState["players"][myPlayerIndex];
 
-            Console.WriteLine("Teszt Elek");
+            //Console.WriteLine("Teszt Elek");
 
 			//TODO: Use this method to return the value You want to bet
 			return 100;
