@@ -15,4 +15,5 @@ namespace Nancy.Simple
         public CardType Suit { get; set; }
         public int Value { get; set; }
     }
+
 }
