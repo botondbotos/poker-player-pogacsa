@@ -80,14 +80,12 @@
     <Compile Include="Model\GameState.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="PokerPlayer.cs" />
-    <Compile Include="Tests\SerializationTests.cs" />
     <Compile Include="RankingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ok">
@@ -96,6 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tests\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
