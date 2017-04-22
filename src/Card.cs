@@ -13,11 +13,7 @@ namespace Nancy.Simple
     class Card
     {
         public CardType Suit { get; set; }
-        public int Value { get; set; }
+        public int Rank { get; set; }
 
-        public bool isMyPair(Card card)
-        {
-            return card.Suit == this.Suit && card.Value == this.Value;
-        }
     }
 }
