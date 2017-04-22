@@ -14,6 +14,10 @@ namespace Nancy.Simple
     {
         public CardType Suit { get; set; }
         public int Value { get; set; }
-    }
 
+        public bool isMyPair(Card card)
+        {
+            return card.Suit == this.Suit && card.Value == this.Value;
+        }
+    }
 }
