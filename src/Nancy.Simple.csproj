@@ -73,10 +73,6 @@
     <Compile Include="Card.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="App.cs" />
-    <Compile Include="Model\CommunityCard.cs" />
-    <Compile Include="Model\GameState.cs" />
-    <Compile Include="Model\HoleCard.cs" />
-    <Compile Include="Model\Player.cs" />
     <Compile Include="PokerPlayer.cs" />
   </ItemGroup>
   <ItemGroup>
