@@ -31,49 +31,47 @@ namespace Nancy.Simple.Model
 
     public class Card
     {
-        public CardSuite Suit { get; set; }
-        public CardRank Rank { get; set; }
+        private CardSuite suit;
+        private CardRank rank;
 
-        public static Card Parse(JObject json)
-        {
-            Card result = new Card();
-
-            result.Suit = retrieveCardSuite(json["suite"].Value<string>());
-            result.Rank = retrieveCardRank(json["rank"].Value<string>());
-
-            return result;
+        public CardSuite Suit {
+            get
+            {
+                return suit;
+            }
+            set
+            {
+                if (value.Equals("hearts")) suit = CardSuite.Hearts;
+                else if (value.Equals("clubs")) suit = CardSuite.Clubs;
+                else if (value.Equals("spades")) suit = CardSuite.Spades;
+                else if (value.Equals("diamonds")) suit = CardSuite.Diamonds;
+            }
         }
 
-        private static CardSuite retrieveCardSuite(string strType)
-        {
-            CardSuite result = CardSuite.Diamonds;
-
-            if (strType.Equals("hearts")) result = CardSuite.Hearts;
-            else if(strType.Equals("clubs")) result = CardSuite.Clubs;
-            else if(strType.Equals("spades")) result = CardSuite.Spades;
-
-            return result;
+        public CardRank Rank {
+            get
+            {
+                return rank;
+            }
+            set
+            {
+                if (value.Equals("1")) rank = CardRank.One;
+                else if (value.Equals("2")) rank = CardRank.Two;
+                else if (value.Equals("3")) rank = CardRank.Three;
+                else if (value.Equals("4")) rank = CardRank.Four;
+                else if (value.Equals("5")) rank = CardRank.Five;
+                else if (value.Equals("6")) rank = CardRank.Six;
+                else if (value.Equals("7")) rank = CardRank.Seven;
+                else if (value.Equals("8")) rank = CardRank.Eight;
+                else if (value.Equals("9")) rank = CardRank.Nine;
+                else if (value.Equals("10")) rank = CardRank.Ten;
+                else if (value.Equals("J")) rank = CardRank.Jumbo;
+                else if (value.Equals("Q")) rank = CardRank.Quen;
+                else if (value.Equals("K")) rank = CardRank.King;
+                else if (value.Equals("A")) rank = CardRank.Ace;
+            }
         }
-
-        private static CardRank retrieveCardRank(string strRank)
-        {
-            CardRank result = CardRank.One;
-
-            if (strRank.Equals("2")) result = CardRank.Two;
-            else if (strRank.Equals("3")) result = CardRank.Three;
-            else if (strRank.Equals("4")) result = CardRank.Four;
-            else if (strRank.Equals("5")) result = CardRank.Five;
-            else if (strRank.Equals("6")) result = CardRank.Six;
-            else if (strRank.Equals("7")) result = CardRank.Seven;
-            else if (strRank.Equals("8")) result = CardRank.Eight;
-            else if (strRank.Equals("9")) result = CardRank.Nine;
-            else if (strRank.Equals("10")) result = CardRank.Ten;
-            else if (strRank.Equals("J")) result = CardRank.Jumbo;
-            else if (strRank.Equals("Q")) result = CardRank.Quen;
-            else if (strRank.Equals("K")) result = CardRank.King;
-            else if (strRank.Equals("A")) result = CardRank.Ace;
-            
-            return result;
-        }
+        
+  
     }
 }
