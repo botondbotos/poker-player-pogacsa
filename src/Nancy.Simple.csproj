@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BettingStrategies\ChenStrategy.cs" />
     <Compile Include="BettingStrategies\IBettingStrategy.cs" />
     <Compile Include="BettingStrategies\RandomStrategy.cs" />
     <Compile Include="MainModule.cs" />
