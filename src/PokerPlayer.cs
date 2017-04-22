@@ -18,11 +18,11 @@ namespace Nancy.Simple
                     .Select<Card, string>(item => item.Rank.ToString())
                     .ToArray();
 
-                Console.Error.WriteLine("My cards: {0}", string.Join(", ", myCards));
+                //Console.Error.WriteLine("My cards: {0}", string.Join(", ", myCards));
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine("Error converting JSON {0}", e.Message);
+                //Console.Error.WriteLine("Error converting JSON {0}", e.Message);
             }
 
             
