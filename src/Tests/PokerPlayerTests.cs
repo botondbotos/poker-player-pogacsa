@@ -79,10 +79,10 @@ namespace Nancy.Simple.Tests
     ""bet_index"": 8 
 } ";
 
-            JObject gameData = JObject.Parse(jsonData);
+            var jGameState = JObject.Parse(jsonData);
 
             // Act
-            int actual = PokerPlayer.BetRequest(gameData);
+            var actual = PokerPlayer.BetRequest(jGameState);
 
             // Assert
             Assert.That(actual, Is.GreaterThan(0));
