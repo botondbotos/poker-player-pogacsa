@@ -19,6 +19,6 @@ namespace Nancy.Simple.Model
         public int orbits { get; set; }
         public int in_action { get; set; }
         public List<Player> players { get; set; }
-        public List<CommunityCard> community_cards { get; set; }
+        public List<Card> community_cards { get; set; }
     }
 }

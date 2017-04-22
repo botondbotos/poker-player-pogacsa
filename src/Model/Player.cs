@@ -10,6 +10,6 @@ namespace Nancy.Simple.Model
         public string version { get; set; }
         public int stack { get; set; }
         public int bet { get; set; }
-        public List<HoleCard> hole_cards { get; set; }
+        public List<Card> hole_cards { get; set; }
     }
 }
