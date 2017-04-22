@@ -11,6 +11,7 @@ namespace Nancy.Simple
 
 		public static int BetRequest(JObject rawGameState)
 		{
+
             try
             {
                 GameState gameState = rawGameState.ToObject<GameState>();
@@ -22,7 +23,10 @@ namespace Nancy.Simple
             }
             catch (Exception e)
             {
+                Console.WriteLine("raw game state: {0}", rawGameState.ToString());
+
                 Console.Error.WriteLine("Error converting JSON {0}", e.Message);
+                Console.Error.WriteLine(e.StackTrace);
             }
 
             
