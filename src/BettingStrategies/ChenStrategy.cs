@@ -21,47 +21,47 @@ namespace Nancy.Simple.BettingStrategies
             var rankingService = new RankingService();
             int bet = 0;
 
-            try
+            var myself = gameState.players[gameState.in_action];
+            var moneyLeft = myself.stack;
+            var handCards = gameState.players[gameState.in_action].hole_cards;
+
+            int chenValue = rankingService.GetChenRanking(handCards);
+
+            int callAmount = gameState.current_buy_in - myself.bet + gameState.minimum_raise;
+            int allInAmount = myself.stack;
+            int activePlayerCount = gameState.players.Count(player => player.status == "active");
+
+            bool inPreflop = gameState.community_cards.Count == 0;
+
+            #region Pre-flop strategy
+            if (inPreflop)
             {
-                var myself = gameState.players[gameState.in_action];
-                var moneyLeft = myself.stack;
-                var handCards = gameState.players[gameState.in_action].hole_cards;
-
-                int chenValue = rankingService.GetChenRanking(handCards);
-
-                int callAmount = gameState.current_buy_in - myself.bet + gameState.minimum_raise;
-                int allInAmount = myself.stack;
-                int activePlayerCount = gameState.players.Count(player => player.status == "active");
-
-                bool inPreflop = gameState.community_cards.Count == 0;
-
-                if (inPreflop)
+                if (chenValue >= 7)
                 {
-                    if (chenValue >= 7)
-                    {
-                        return Math.Min(callAmount, (int)allInAmount / 2);
-                    }
-
-                    if (handCards[0].Rank == handCards[1].Rank)
-                        return Math.Min(callAmount, (int)(moneyLeft / 4));
-
-                    return 0;
+                    return Math.Min(callAmount, (int)allInAmount / 2);
                 }
 
-                bet = 100 + new Random().Next(10, 100);
+                if (handCards[0].Rank == handCards[1].Rank)
+                    return Math.Min(callAmount, (int)(moneyLeft / 4));
 
-                return bet;
-
+                return 0;
             }
-            catch (Exception e)
-            {
-                //Console.Error.WriteLine("raw game state: {0}", rawGameState.ToString());
+            #endregion
 
-                Console.Error.WriteLine("Error converting JSON {0}", e.Message);
-                Console.Error.WriteLine("Stack trace: {0}", e.StackTrace);
-            }
+            Rank rank = this.GetRank(handCards.Union(gameState.community_cards).ToList());
 
-            return 0;
+            if (rank == Rank.None)
+                bet = 10 + new Random().Next(10, 20);
+            else if (rank == Rank.OnePair)
+                bet = 50;
+            else if (rank == Rank.TwoPairs)
+                bet = Math.Min(callAmount, (int)moneyLeft / 4);
+            else
+                bet = allInAmount;
+
+
+            return bet;
+            
         }
 
         public Rank GetRank(List<Card> cards) {
@@ -69,9 +69,30 @@ namespace Nancy.Simple.BettingStrategies
             var suits = cards.Select(card => card.Suit).ToList();
             var values = cards.Select(card => RankingService.Rank2Value[card.Rank]).ToList();
 
-            //for (int i=0; i< i)
+            var valueFrequency = new Dictionary<int, int>();
 
-            return Rank.OnePair;
+
+            foreach (int value in values)
+            {
+                if (!valueFrequency.ContainsKey(value))
+                    valueFrequency[value] = 1;
+                else
+                    valueFrequency[value] += 1;
+            }
+
+            if (valueFrequency.ContainsValue(4))
+                return Rank.Poker;
+
+            if (valueFrequency.ContainsValue(3))
+                return Rank.Drill;
+
+            if (valueFrequency.Values.Count(item => item == 2) == 2)
+                return Rank.TwoPairs;
+
+            if (valueFrequency.ContainsValue(2))
+                return Rank.OnePair;
+
+            return Rank.None;
         }
     }
 }
