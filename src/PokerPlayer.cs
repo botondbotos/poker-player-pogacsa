@@ -8,7 +8,7 @@ namespace Nancy.Simple
 {
 	public static class PokerPlayer
 	{
-		public static readonly string VERSION = "Rette.NETes pogacsa poker bot";
+		public static readonly string VERSION = "Pogacsa v0.1";
 
 		public static int BetRequest(JObject gameState)
 		{
@@ -24,7 +24,7 @@ namespace Nancy.Simple
 			//TODO: Use this method to return the value You want to bet
             int bet = 100 + kocka.Next(10, 100);
 
-            Console.WriteLine("Betting: {0}", bet);
+            Console.Error.WriteLine("Betting: {0}", bet);
 			return bet;
 		}
 
