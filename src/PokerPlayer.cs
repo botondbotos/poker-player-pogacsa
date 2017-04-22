@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Nancy.Simple.Model;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 using System;
 
@@ -10,6 +12,8 @@ namespace Nancy.Simple
 
 		public static int BetRequest(JObject gameState)
 		{
+            var typeSafeGameState = gameState.ToObject<GameState>();
+
             var kocka = new Random();
             //int myPlayerIndex = (int)gameState["in_action"];
             //int myPlayer = (int)gameState["players"][myPlayerIndex];
