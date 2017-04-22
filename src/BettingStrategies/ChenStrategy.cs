@@ -1,11 +1,21 @@
 ﻿using System;
 using System.Linq;
 using Nancy.Simple.Model;
+using System.Collections.Generic;
 
 namespace Nancy.Simple.BettingStrategies
 {
     public class ChenStrategy : IBettingStrategy
     {
+        public enum Rank
+        {
+            None,
+            OnePair,
+            TwoPairs,
+            Drill,
+            Poker
+        }
+
         public int PlaceBet(GameState gameState)
         {
             var rankingService = new RankingService();
@@ -31,6 +41,9 @@ namespace Nancy.Simple.BettingStrategies
                         return Math.Min(callAmount, (int)allInAmount / 2);
                     }
 
+                    if (handCards[0].Rank == handCards[1].Rank)
+                        return callAmount;
+
                     return 0;
                 }
 
@@ -48,6 +61,16 @@ namespace Nancy.Simple.BettingStrategies
             }
 
             return 0;
+        }
+
+        public Rank GetRank(List<Card> cards) {
+            var ranks = cards.Select(card => card.Rank).ToList();
+            var suits = cards.Select(card => card.Suit).ToList();
+            var values = cards.Select(card => RankingService.Rank2Value[card.Rank]).ToList();
+
+            //for (int i=0; i< i)
+
+            return Rank.OnePair;
         }
     }
 }

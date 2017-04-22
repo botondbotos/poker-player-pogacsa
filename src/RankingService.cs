@@ -8,7 +8,7 @@ namespace Nancy.Simple
 {
     class RankingService
     {
-        private Dictionary<CardRank, int> Rank2Value = new Dictionary<CardRank, int>
+        public static Dictionary<CardRank, int> Rank2Value = new Dictionary<CardRank, int>
         {
             {CardRank.One, 1},
             {CardRank.Two, 2},
