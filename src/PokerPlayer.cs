@@ -22,7 +22,7 @@ namespace Nancy.Simple
             }
             catch (Exception e)
             {
-                //Console.Error.WriteLine("Error converting JSON {0}", e.Message);
+                Console.Error.WriteLine("Error converting JSON {0}", e.Message);
             }
 
             
@@ -35,7 +35,7 @@ namespace Nancy.Simple
             //var cardValue = RankingService.Rank();
 
             var kocka = new Random();
-            int bet = 100 + kocka.Next(10, 100);
+            int bet = 50 + kocka.Next(10, 100);
 
             //Console.Error.WriteLine("Betting: {0}", bet);
 			return bet;
