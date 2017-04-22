@@ -24,6 +24,7 @@ namespace Nancy.Simple.BettingStrategies
             try
             {
                 var myself = gameState.players[gameState.in_action];
+                var moneyLeft = myself.stack;
                 var handCards = gameState.players[gameState.in_action].hole_cards;
 
                 int chenValue = rankingService.GetChenRanking(handCards);
@@ -42,7 +43,7 @@ namespace Nancy.Simple.BettingStrategies
                     }
 
                     if (handCards[0].Rank == handCards[1].Rank)
-                        return callAmount;
+                        return Math.Min(callAmount, (int)(moneyLeft / 4));
 
                     return 0;
                 }
