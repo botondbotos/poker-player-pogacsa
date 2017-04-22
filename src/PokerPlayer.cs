@@ -10,14 +10,20 @@ namespace Nancy.Simple
 
 		public static int BetRequest(JObject gameState)
 		{
+            var kocka = new Random();
             //int myPlayerIndex = (int)gameState["in_action"];
             //int myPlayer = (int)gameState["players"][myPlayerIndex];
 
             //Console.WriteLine("Teszt Elek");
+            //var cardValue = RankingService.Rank();
 
 			//TODO: Use this method to return the value You want to bet
-			return 100;
+            int bet = 100 + kocka.Next(10, 100);
+
+            Console.WriteLine("Betting: {0}", bet);
+			return bet;
 		}
+
 
 		public static void ShowDown(JObject gameState)
 		{
