@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
-
+﻿using Nancy.Simple.Model;
+using Newtonsoft.Json.Linq;
 using System;
 
 namespace Nancy.Simple
@@ -8,16 +8,25 @@ namespace Nancy.Simple
 	{
 		public static readonly string VERSION = "Pogacsa v0.1";
 
-		public static int BetRequest(JObject gameState)
+		public static int BetRequest(JObject rawGameState)
 		{
-            var kocka = new Random();
+            try
+            {
+                GameState gameState = rawGameState.ToObject<GameState>();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine("Error converting JSON {0}", e.Message);
+            }
+
+
             //int myPlayerIndex = (int)gameState["in_action"];
             //int myPlayer = (int)gameState["players"][myPlayerIndex];
 
             //Console.WriteLine("Teszt Elek");
             //var cardValue = RankingService.Rank();
 
-			//TODO: Use this method to return the value You want to bet
+            var kocka = new Random();
             int bet = 100 + kocka.Next(10, 100);
 
             Console.Error.WriteLine("Betting: {0}", bet);
