@@ -7,19 +7,42 @@ namespace Nancy.Simple
 {
 	public static class PokerPlayer
 	{
-		public static readonly string VERSION = "Pogacsa v0.1";
+		public static readonly string VERSION = "KrumplisTeszta v0.2";
 
 		public static int BetRequest(JObject rawGameState)
 		{
+            var rankingService = new RankingService();
+            int bet = 0;
+            
+            try {
 
-            try
-            {
                 GameState gameState = rawGameState.ToObject<GameState>();
-                var myCards = gameState.players[gameState.in_action].hole_cards
-                    .Select<Card, string>(item => item.Rank.ToString())
-                    .ToArray();
 
-                Console.Error.WriteLine("Gyurma: {0}", string.Join(", ", myCards));
+                var myself = gameState.players[gameState.in_action];
+                var handCards = gameState.players[gameState.in_action].hole_cards;
+
+                int chenValue = rankingService.GetChenRanking(handCards);
+
+                int callAmount = gameState.current_buy_in - myself.bet + gameState.minimum_raise;
+                int allInAmount = myself.stack;
+                int activePlayerCount = gameState.players.Count(player => player.status == "active");
+
+                bool inPreflop = gameState.community_cards.Count == 0;
+
+                if (inPreflop)
+                {
+                    if (chenValue >= 7)
+                    {
+                        return Math.Min(callAmount, (int)allInAmount / 2);
+                    }
+
+                    return 0;
+                }
+
+                bet = 100 + new Random().Next(10, 100);
+
+                return bet;
+                
             }
             catch (Exception e)
             {
@@ -29,20 +52,9 @@ namespace Nancy.Simple
                 Console.Error.WriteLine("Stack trace: {0}", e.StackTrace);
             }
 
-            
+            return 0;
 
 
-            //int myPlayerIndex = (int)gameState["in_action"];
-            //int myPlayer = (int)gameState["players"][myPlayerIndex];
-
-            //Console.WriteLine("Teszt Elek");
-            //var cardValue = RankingService.Rank();
-
-            var kocka = new Random();
-            int bet = 50 + kocka.Next(10, 100);
-
-            //Console.Error.WriteLine("Betting: {0}", bet);
-			return bet;
 		}
 
 

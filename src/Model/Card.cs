@@ -20,7 +20,7 @@ namespace Nancy.Simple.Model
         Nine = 9,
         Ten = 10,
         Jumbo = 11,
-        Quen = 12,
+        Queen = 12,
         King = 13,
         Ace = 14
     }
@@ -51,7 +51,7 @@ namespace Nancy.Simple.Model
             { "9", CardRank.Nine },
             { "10", CardRank.Ten },
             { "J", CardRank.Jumbo },
-            { "Q", CardRank.Quen },
+            { "Q", CardRank.Queen },
             { "K", CardRank.King },
             { "A", CardRank.Ace },
         };
