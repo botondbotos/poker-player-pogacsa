@@ -23,7 +23,7 @@ namespace Nancy.Simple
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine("raw game state: {0}", rawGameState.ToString());
+                //Console.Error.WriteLine("raw game state: {0}", rawGameState.ToString());
 
                 Console.Error.WriteLine("Error converting JSON {0}", e.Message);
                 Console.Error.WriteLine("Stack trace: {0}", e.StackTrace);
