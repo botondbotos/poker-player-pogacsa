@@ -27,8 +27,8 @@ namespace Nancy.Simple.Model
 
     public class Card
     {
-        private string suit;
-        private string rank;
+        public string suit;
+        public string rank;
 
         private Dictionary<string, CardSuite> cardSuiteMapping = new Dictionary<string, CardSuite>()
         {
