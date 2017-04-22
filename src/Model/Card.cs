@@ -10,10 +10,10 @@ namespace Nancy.Simple.Model
     {
         Diamonds, Clubs, Hearts, Spades
     }
-    
+
     public enum CardRank
     {
-        One = 1, 
+        One = 1,
         Two = 2,
         Three = 3,
         Four = 4,
@@ -31,47 +31,51 @@ namespace Nancy.Simple.Model
 
     public class Card
     {
-        private CardSuite suit;
-        private CardRank rank;
+        private string suit;
+        private string rank;
 
-        public CardSuite Suit {
+        private Dictionary<string, CardSuite> cardSuiteMapping = new Dictionary<string, CardSuite>()
+        {
+            {"clubs", CardSuite.Clubs },
+            {"diamonds", CardSuite.Diamonds },
+            {"hearts", CardSuite.Hearts },
+            {"spades", CardSuite.Spades },
+        };
+
+        private Dictionary<string, CardRank> cardRateMapping = new Dictionary<string, CardRank>()
+        {
+            { "1", CardRank.One },
+            { "2", CardRank.Two },
+            { "3", CardRank.Three },
+            { "4", CardRank.Four },
+            { "5", CardRank.Five },
+            { "6", CardRank.Six },
+            { "7", CardRank.Seven },
+            { "8", CardRank.Eight },
+            { "9", CardRank.Nine },
+            { "10", CardRank.Ten },
+            { "J", CardRank.Jumbo },
+            { "Q", CardRank.Quen },
+            { "K", CardRank.King },
+            { "A", CardRank.Ace },
+        };
+
+        public CardSuite Suit
+        {
             get
             {
-                return suit;
-            }
-            set
-            {
-                if (value.Equals("hearts")) suit = CardSuite.Hearts;
-                else if (value.Equals("clubs")) suit = CardSuite.Clubs;
-                else if (value.Equals("spades")) suit = CardSuite.Spades;
-                else if (value.Equals("diamonds")) suit = CardSuite.Diamonds;
+                return cardSuiteMapping[suit];
             }
         }
 
-        public CardRank Rank {
+        public CardRank Rank
+        {
             get
             {
-                return rank;
-            }
-            set
-            {
-                if (value.Equals("1")) rank = CardRank.One;
-                else if (value.Equals("2")) rank = CardRank.Two;
-                else if (value.Equals("3")) rank = CardRank.Three;
-                else if (value.Equals("4")) rank = CardRank.Four;
-                else if (value.Equals("5")) rank = CardRank.Five;
-                else if (value.Equals("6")) rank = CardRank.Six;
-                else if (value.Equals("7")) rank = CardRank.Seven;
-                else if (value.Equals("8")) rank = CardRank.Eight;
-                else if (value.Equals("9")) rank = CardRank.Nine;
-                else if (value.Equals("10")) rank = CardRank.Ten;
-                else if (value.Equals("J")) rank = CardRank.Jumbo;
-                else if (value.Equals("Q")) rank = CardRank.Quen;
-                else if (value.Equals("K")) rank = CardRank.King;
-                else if (value.Equals("A")) rank = CardRank.Ace;
+                return cardRateMapping[rank];
             }
         }
-        
-  
+
+
     }
 }
