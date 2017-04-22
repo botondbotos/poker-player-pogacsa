@@ -18,7 +18,10 @@ namespace Nancy.Simple
             //var cardValue = RankingService.Rank();
 
 			//TODO: Use this method to return the value You want to bet
-			return 100 + kocka.Next(10, 100);
+            int bet = 100 + kocka.Next(10, 100);
+
+            Console.WriteLine("Betting: {0}", bet);
+			return bet;
 		}
 
 
