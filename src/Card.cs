@@ -32,38 +32,25 @@ namespace Nancy.Simple
     class Card
     {
         public CardSuite Suit { get; set; }
-        public int Rank { get; set; }
+        public CardRank Rank { get; set; }
 
         public static Card Parse(JObject json)
         {
             Card result = new Card();
 
             result.Suit = retrieveCardSuite(json["suite"].Value<string>());
-            result.Rank = (int)retrieveCardRank(json["rank"].Value<string>());
+            result.Rank = retrieveCardRank(json["rank"].Value<string>());
 
             return result;
         }
 
         private static CardSuite retrieveCardSuite(string strType)
         {
-            CardSuite result;
+            CardSuite result = CardSuite.Diamonds;
 
-            if(strType.Equals("hearts"))
-            {
-                result = CardSuite.Hearts;
-            }
-            else if(strType.Equals("clubs"))
-            {
-                result = CardSuite.Clubs;
-            }
-            else if(strType.Equals("spades"))
-            {
-                result = CardSuite.Spades;
-            }
-            else
-            {
-                result = CardSuite.Diamonds;
-            }
+            if (strType.Equals("hearts")) result = CardSuite.Hearts;
+            else if(strType.Equals("clubs")) result = CardSuite.Clubs;
+            else if(strType.Equals("spades")) result = CardSuite.Spades;
 
             return result;
         }
