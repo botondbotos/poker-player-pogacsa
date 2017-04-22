@@ -1,14 +1,17 @@
-﻿using Nancy.Simple.Model;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Nancy.Simple.Tests
 {
     [TestFixture]
-    public class SerializationTests
+    public class PokerPlayerTests
     {
         [Test]
-        public void CanDeserialzieExampleJson()
+        public void CanBetRequest()
         {
             // Arrange
             var jsonData = @"
@@ -76,11 +79,13 @@ namespace Nancy.Simple.Tests
     ""bet_index"": 8 
 } ";
 
+            var jGameState = JObject.Parse(jsonData);
+
             // Act
-            var actual = JObject.Parse(jsonData).ToObject<GameState>();
+            var actual = PokerPlayer.BetRequest(jGameState);
 
             // Assert
-            Assert.That(actual, Is.Not.Null);
+            Assert.That(actual, Is.GreaterThan(0));
         }
     }
 }
