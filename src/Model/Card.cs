@@ -6,12 +6,12 @@ using System.Text;
 
 namespace Nancy.Simple.Model
 {
-    enum CardSuite
+    public enum CardSuite
     {
         Diamonds, Clubs, Hearts, Spades
     }
     
-    enum CardRank
+    public enum CardRank
     {
         One = 1, 
         Two = 2,
