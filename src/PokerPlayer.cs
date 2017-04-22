@@ -18,7 +18,7 @@ namespace Nancy.Simple
                     .Select<Card, string>(item => item.Rank.ToString())
                     .ToArray();
 
-                //Console.Error.WriteLine("My cards: {0}", string.Join(", ", myCards));
+                Console.Error.WriteLine("My cards: {0}", string.Join(", ", myCards));
             }
             catch (Exception e)
             {
